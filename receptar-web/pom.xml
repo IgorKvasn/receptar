@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>receptar</artifactId>
+        <groupId>sk.kvasnicka</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>receptar-web</artifactId>
+
+    <build>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
+                <configuration>
+                    <installDirectory>${user.home}/tmpInstDir</installDirectory>
+                    <!--<nodeVersion>v8.1.2</nodeVersion>-->
+                    <nodeVersion>v10.13.0</nodeVersion>
+                    <!--<npmVersion>3.10.8</npmVersion>-->
+                    <npmVersion>4.8.7</npmVersion>
+                    <!--<yarnVersion>v0.24.5</yarnVersion>-->
+                    <yarnVersion>v1.13.0</yarnVersion>
+                    <skip>true</skip>
+                    <!--<nodeDownloadRoot>http://nodejs.org/dist/</nodeDownloadRoot> &lt;!&ndash;kvoli problemom s proxy na lep05 je treba pouzivat HTTP namiesto HTTPS, co pouziva defaultne plugin&ndash;&gt;-->
+                    <!--<yarnDownloadRoot>http://github.com/yarnpkg/yarn/releases/download/</yarnDownloadRoot>-->
+
+                    <!--<environmentVariables>-->
+                    <!--<PATH>/opt/rh/devtoolset-2/root/usr/bin:/opt/home/tomcat7sys/.sdkman/candidates/java/current/bin:/opt/home/tomcat7sys/.sdkman/candidates/gradle/current/bin:/usr/local/apache-maven-3.2.2/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin</PATH>-->
+                    <!--</environmentVariables>-->
+
+
+                    <!-- PROXY nakonfigurovane v /opt/home/tomcat7sys/.yarnrc -->
+                    <bowerInheritsProxyConfigFromMaven>false</bowerInheritsProxyConfigFromMaven>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install-frontend-build-tools</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${frontend-maven-plugin.skip}</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <arguments>install --cache-folder=${yarnCacheDir}</arguments>
+                            <skip>${frontend-maven-plugin.skip}</skip>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>run test</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipJsTests}</skip>
+                            <arguments>run test</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-frontend-production</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${emberDevelopmentBuild}</skip>
+                            <arguments>run build-release</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-frontend-development</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${emberProductionBuild}</skip>
+                            <arguments>run build-development</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>start-frontend-development</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${emberDevelopmentSkip}</skip>
+                            <arguments>run start</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>tmp</directory>
+                                </fileset>
+                                <fileset>
+                                    <directory>dist</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>cleanEmberDependencies</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipCleanEmber}</skip>
+                            <filesets>
+                                <fileset>
+                                    <directory>node_modules/</directory>
+                                </fileset>
+                                &lt;!&ndash;<fileset>
+                                    <directory>bower_components/</directory>
+                                </fileset>&ndash;&gt;
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+
+      <!--      <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>clean</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="Creating empty folder dist/..." />
+                                <mkdir dir="${project.basedir}/dist" />
+                                <mkdir dir="${project.basedir}/tmp" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+        </plugins>
+
+       <!-- <resources>
+            <resource>
+                <directory>${basedir}/dist/</directory>
+                <excludes>
+                    <exclude>tests/</exclude>
+                    <exclude>**/.gitkeep</exclude>
+                    <exclude>testem.json</exclude>
+                </excludes>
+                <targetPath>META-INF/resources/</targetPath>
+            </resource>
+        </resources>-->
+    </build>
+
+</project>
