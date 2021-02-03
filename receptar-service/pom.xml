@@ -12,7 +12,15 @@
     <artifactId>receptar-service</artifactId>
 
     <build>
-    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>sk.kvasnicka</groupId>
+            <artifactId>receptar-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
