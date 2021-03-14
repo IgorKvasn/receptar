@@ -27,4 +27,6 @@ class User(
         }
     }
 
+  companion object A{}
+
 }

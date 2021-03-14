@@ -1,0 +1,15 @@
+<ng-template #rowTemplate let-row="row">
+  <td>
+    {{row.name}}
+  </td>
+  <td>
+    {{row.createDate | date:'dd.MM.YYYY HH:mm'}}
+  </td>
+  <td>
+    <app-recipe-rating [rating]="row.rating"></app-recipe-rating>
+  </td>
+</ng-template>
+
+<app-table [columns]="columns" [rows]="data" [rowTemplate]="rowTemplate">
+
+</app-table>

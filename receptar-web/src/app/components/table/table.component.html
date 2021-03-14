@@ -1,0 +1,14 @@
+<table class="table table is-bordered table is-striped table is-fullwidth">
+  <thead>
+  <tr>
+    <th *ngFor="let col of columns">
+      {{col.label}}
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of rows">
+      <ng-container *ngTemplateOutlet="rowTemplate; context: {row:row}" ></ng-container>
+    </tr>
+  </tbody>
+</table>
