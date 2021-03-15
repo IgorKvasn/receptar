@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 const MAX_RATING = 5;
 
@@ -11,18 +11,50 @@ export class RecipeRatingComponent implements OnInit {
 
   @Input() rating: number;
 
+  @Input() editable: boolean;
+
+  @Output() onRatingChanged = new EventEmitter();
+
+  hoverState = false;
+
+  hoverRating: number = 0;
+
+  ratingArray: number[] = [];
+
   constructor() {
+    this.ratingArray = [...Array(MAX_RATING).keys()];
   }
 
   ngOnInit(): void {
   }
 
   get ratingStars(): number[] {
-    return Array(this.rating).fill(1);
+    return this.ratingArray.slice(0, this.rating);
   }
 
   get emptyStars(): number[] {
-    return Array(MAX_RATING - this.rating).fill(2);
+    return this.ratingArray.slice(this.rating);
   }
 
+  starClicked(newRating: number): void {
+    console.log(newRating);
+  }
+
+  mouseEnter(rating: number): void {
+    this.hoverRating = rating;
+  }
+
+  mouseLeave(): void {
+    this.hoverRating = 0;
+  }
+
+  mouseEnterRating(): void {
+    if (this.editable === true) {
+      this.hoverState = true;
+    }
+  }
+
+  mouseLeaveRating(): void {
+    this.hoverState = false;
+  }
 }

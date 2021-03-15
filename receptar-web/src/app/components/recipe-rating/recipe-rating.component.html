@@ -1,4 +1,13 @@
-<div class="rating">
-  <span class="star fa fa-star checked" *ngFor="let s of ratingStars"></span>
-  <span class="star fa fa-star" *ngFor="let s of emptyStars"></span>
+<div class="rating"
+     (mouseenter)="mouseEnterRating() "
+     (mouseleave)="mouseLeaveRating()">
+  <span class="star fa fa-star" *ngFor="let s of ratingArray"
+        [title]='s+1'
+        [ngClass]="((hoverState===false && s<rating) || (hoverState===true && s<=hoverRating))?'checked':''"
+        (click)="starClicked(s+1)"
+        (mouseenter)="mouseEnter(s) "
+        (mouseleave)="mouseLeave()"
+  >
+
+  </span>
 </div>

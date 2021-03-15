@@ -1,14 +1,18 @@
-<table class="table table is-bordered table is-striped table is-fullwidth">
+<table class="table is-bordered is-striped is-fullwidth is-hoverable">
   <thead>
   <tr>
-    <th *ngFor="let col of columns">
+    <th *ngFor="let col of columns" [style.width]="col.width">
       {{col.label}}
     </th>
   </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of rows">
-      <ng-container *ngTemplateOutlet="rowTemplate; context: {row:row}" ></ng-container>
-    </tr>
+  <tr *ngFor="let row of rows" (click)="rowClicked(row)">
+    <ng-container *ngTemplateOutlet="rowTemplate; context: {row:row}"></ng-container>
+  </tr>
   </tbody>
 </table>
+
+<div>
+
+</div>

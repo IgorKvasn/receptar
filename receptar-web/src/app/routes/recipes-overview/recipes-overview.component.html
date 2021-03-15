@@ -10,6 +10,11 @@
   </td>
 </ng-template>
 
-<app-table [columns]="columns" [rows]="data" [rowTemplate]="rowTemplate">
+<app-table
+  [columns]="columns"
+  [rows]="data"
+  [rowTemplate]="rowTemplate"
+  (onRowClicked)="onRecipeSelected($event)"
+>
 
 </app-table>

@@ -1,9 +1,10 @@
-import {Component, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 
 
 export interface TableColumn {
   label: string;
-  columnCode: string;
+  width?: string;
+  cssClass?: string;
 }
 
 export interface TableMetadata {
@@ -32,6 +33,9 @@ export class TableComponent implements OnInit {
   @Input()
   meta?: TableMetadata;
 
+  @Output()
+  onRowClicked = new EventEmitter();
+
   constructor() {
   }
 
@@ -39,6 +43,9 @@ export class TableComponent implements OnInit {
 
   }
 
+  rowClicked(row: any): void {
+    this.onRowClicked.emit(row);
+  }
 }
 
 

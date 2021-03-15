@@ -9,6 +9,7 @@ import { TableComponent } from './components/table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RecipeRatingComponent } from './components/recipe-rating/recipe-rating.component';
+import { RecipesDetailComponent } from './routes/recipes-detail/recipes-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { RecipeRatingComponent } from './components/recipe-rating/recipe-rating.
     RecipesOverviewComponent,
     TableComponent,
     RecipeRatingComponent,
+    RecipesDetailComponent,
   ],
   imports: [
     BrowserModule,
