@@ -1,0 +1,11 @@
+<div *ngIf="recipe$ | async as recipe; else loading">
+  <div class="box">
+    <h1 class="title">{{recipe.name}}</h1>
+    <h2 class="subtitle">{{recipe.createDate | date:'dd.MM.YYYY HH:mm'}}</h2>
+
+  </div>
+
+</div>
+<ng-template #loading>Loading...</ng-template>
+
+
