@@ -1,4 +1,4 @@
-<table class="table is-bordered is-striped is-fullwidth is-hoverable">
+<table class="table is-bordered is-fullwidth is-hoverable">
   <thead>
   <tr>
     <th *ngFor="let col of columns" [style.width]="col.width">
@@ -13,6 +13,10 @@
   </tbody>
 </table>
 
-<div>
-
+<div class="container" *ngIf="pagination">
+  <div class="pagination-container">
+    <button class="button" (click)="previousPage()">Späť</button>
+    <div class="pagination-range">{{currentPage + 1}}/{{meta.value?.totalPages}}</div>
+    <button class="button" (click)="nextPage()">Ďalej</button>
+  </div>
 </div>

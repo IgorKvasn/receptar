@@ -1,3 +1,9 @@
 .navbar .navbar-item.is-active{
   border-bottom: 1px solid black;
 }
+
+.navbar{
+  .navbar-burger span{
+    transition-duration: 500ms;
+  }
+}

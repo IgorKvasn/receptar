@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+const SIDE_MENU_WIDTH = 250; // in px
 
 @Component({
   selector: 'app-layout-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
+  public navbarOpened = false;
 
   ngOnInit(): void {
   }
 
+  onBurgerClick() {
+    this.navbarOpened = !this.navbarOpened;
+  }
 }

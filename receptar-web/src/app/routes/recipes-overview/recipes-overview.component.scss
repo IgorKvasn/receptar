@@ -1,0 +1,19 @@
+.filter-content {
+  max-height: 0;
+  padding: 0;
+
+  &:not(.filter-visible) {
+    //transition: max-height 2s linear;
+    display: none;
+  }
+
+  &.filter-visible {
+    max-height: 99999px;
+  }
+
+  .field{
+    margin-right: 20px;
+  }
+}
+
+

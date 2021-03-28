@@ -1,0 +1,10 @@
+<div class="modal" [ngClass]="openedDialog.value? 'is-active' : ''">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <!-- Any other Bulma elements you want -->
+    <div class="box">
+      I'm in a box.
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="actionCloseDialog()"></button>
+</div>

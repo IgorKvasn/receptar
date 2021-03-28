@@ -10,11 +10,53 @@
   </td>
 </ng-template>
 
+<h1 class="title">Zoznam receptov</h1>
+
+<div class="card mb-5">
+
+  <div class="card-header" (click)="filterShown = !filterShown">
+    <div class="card-header-title">Filter</div>
+    <div class="card-header-icon">
+      <i class="fas fa-chevron-up" *ngIf="filterShown"></i>
+      <i class="fas fa-chevron-down" *ngIf="!filterShown"></i>
+    </div>
+  </div>
+  <div class="filter-content" [ngClass]="filterShown?'filter-visible':''">
+
+    <div class="card-content">
+      <div class="">
+        <div class="field">
+          <label class="label">Názov receptu</label>
+          <div class="control">
+            <input class="input" type="text">
+          </div>
+        </div>
+
+        <div class="field columns is-centered">
+          <div class="column has-text-centered is-2">
+            <button class="button is-primary text" (click)="openIngrediendsDialog()">Vyber
+              ingrediencie
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<app-ingredients-chooser [openedDialog]="openedIngrediendsDialog"
+                         (closeDialog)="closeIngrediendsDialog();"></app-ingredients-chooser>
+
 <app-table
   [columns]="columns"
   [rows]="data"
+  [meta]="meta"
   [rowTemplate]="rowTemplate"
   (onRowClicked)="onRecipeSelected($event)"
+  [pagination]="true"
+  (onPageChanged)="fetchPage($event)"
 >
 
 </app-table>
